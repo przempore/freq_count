@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 2.8)
+project(freq_analizer)
+cmake_minimum_required(VERSION 2.8.0)
 
-set(CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17)
 
-project(freq_count)
-add_executable(${PROJECT_NAME} "main.cpp")
+add_subdirectory(freq_count)
+# add_subdirectory(test)
