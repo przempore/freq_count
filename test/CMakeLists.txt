@@ -1,3 +1,5 @@
+# http://www.kaizou.org/2014/11/gtest-cmake/
+
 cmake_minimum_required(VERSION 2.8.0)
 project(unitTests)
 
@@ -23,8 +25,9 @@ file(GLOB test_SRC
         src/*.cpp)
 
 # add_library(Deadstorm_obj OBJECT ${game_SRC})
-add_executable(runUnitTests ${test_SRC} $<TARGET_OBJECTS:${PROJECT_NAME}_obj>)
+add_library(${PROJECT_NAME}_test OBJECT ${test_SRC})
+add_executable(runUnitTests ${test_SRC})
 
-# target_link_libraries(runUnitTests gtest gmock_main gem)
+target_link_libraries(runUnitTests gtest gmock_main)
 # # add_test(runUnitTests runUnitTests)
 # add_test(NAME runUnitTests_test COMMAND runUnitTests)
