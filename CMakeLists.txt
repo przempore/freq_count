@@ -7,5 +7,6 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 enable_testing()
 
+add_subdirectory(main)
 add_subdirectory(freq_count)
 add_subdirectory(test)
