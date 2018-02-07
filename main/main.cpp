@@ -7,9 +7,6 @@
 #include <string_view>
 #include <algorithm>
 #include <numeric>
-#include "consts.hpp"
-#include "file_operator.hpp"
-
 
 using namespace std;
 
@@ -110,14 +107,14 @@ void print_letters_count(auto letters_count)
 
 void calculate_letters_count(fstream& file)
 {
-    Letter_pair_n Letter_pair_n(file);
+    Letter_pair_n letter_pair_n(file);
 
-    auto letters_count = Letter_pair_n.get_sorted_letter_count();
+    auto letters_count = letter_pair_n.get_sorted_letter_count();
     print_letters_count(letters_count);
 
     for (size_t pairN = 2; pairN < 6; pairN++)
     {
-        auto letters_count_N2 = Letter_pair_n.get_N_letters_count(pairN);
+        auto letters_count_N2 = letter_pair_n.get_N_letters_count(pairN);
         print_letters_count(letters_count_N2);
     }
 }

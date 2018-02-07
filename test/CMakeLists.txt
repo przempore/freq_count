@@ -37,6 +37,8 @@ find_package(Threads REQUIRED)
 # Enable ExternalProject CMake module
 include(ExternalProject)
 
+set(CXX_STANDARD 17)
+
 # Download and install GoogleTest
 ExternalProject_Add(
     gtest
