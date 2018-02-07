@@ -24,10 +24,9 @@ endif()
 file(GLOB test_SRC
         src/*.cpp)
 
-# add_library(Deadstorm_obj OBJECT ${game_SRC})
 add_library(${PROJECT_NAME}_test OBJECT ${test_SRC})
-add_executable(runUnitTests ${test_SRC})
+add_executable(runUnitTests $<TARGET_OBJECTS:${PROJECT_NAME}_test>)
 
-target_link_libraries(runUnitTests gtest gmock_main)
+target_link_libraries(runUnitTests gtest gmock_main test)
 # # add_test(runUnitTests runUnitTests)
 # add_test(NAME runUnitTests_test COMMAND runUnitTests)
