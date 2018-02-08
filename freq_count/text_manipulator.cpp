@@ -5,9 +5,9 @@ namespace freq_analizer
 namespace text_operation
 {
 
-const Word_count_col Text_manipulator::count_words(const std::vector<std::string> &text)
+const word_count_col Text_manipulator::count_words(words const& text)
 {
-    Word_count_col word_count;
+    word_count_col word_count;
     for (auto&& t : text)
     {
         word_count[t]++;
@@ -16,9 +16,9 @@ const Word_count_col Text_manipulator::count_words(const std::vector<std::string
     return word_count;
 }
 
-const Letters_count_col Text_manipulator::count_letters(const std::vector<std::string> &text)
+const letters_count_col Text_manipulator::count_letters(words const& text)
 {
-    Letters_count_col letters_count;
+    letters_count_col letters_count;
 
     for (auto&& word : text)
     {

@@ -8,7 +8,7 @@ using namespace ::testing;
 namespace
 {
 
-std::vector<std::string> text
+words text
 {
     "first", "first", "first", "first",
     "second", "second", "second",
@@ -34,14 +34,11 @@ struct Text_manipulator_test : Test
 
 TEST_F(Text_manipulator_test, should_count_words)
 {
-    Word_count_col words
+    word_count_col words
     {
-        { "first", 4 },
-        { "second", 3 },
-        { "third", 1 },
-        { "fourth", 5 },
-        { "fifth", 2 },
-        { "sixth", 5 }
+        { "first", 4 }, { "second", 3 },
+        { "third", 1 }, { "fourth", 5 },
+        { "fifth", 2 }, { "sixth", 5 }
     };
 
     EXPECT_EQ(sut.count_words(text), words);
@@ -49,20 +46,11 @@ TEST_F(Text_manipulator_test, should_count_words)
 
 TEST_F(Text_manipulator_test, should_count_letters)
 {
-    Letters_count_col letters_count
+    letters_count_col letters_count
     {
-        {'t', 17},
-        {'f', 13},
-        {'h', 13},
-        {'i', 12},
-        {'s', 12},
-        {'r', 10},
-        {'o', 8},
-        {'u', 5},
-        {'x', 5},
-        {'d', 4},
-        {'c', 3},
-        {'e', 3},
+        {'t', 17}, {'f', 13}, {'h', 13}, {'i', 12},
+        {'s', 12}, {'r', 10}, {'o', 8}, {'u', 5},
+        {'x', 5}, {'d', 4}, {'c', 3}, {'e', 3},
         {'n', 3}
     };
 
