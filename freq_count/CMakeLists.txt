@@ -7,6 +7,8 @@ set(freq_count_src
     consts.hpp
     file_operator.hpp
     file_operator.cpp
+    text_manipulator.hpp
+    text_manipulator.cpp
     )
 
 
