@@ -1,2 +1,0 @@
-/usr/bin/ar qc libfreq_count.a  CMakeFiles/freq_count.dir/source/file_operator.cpp.o
-/usr/bin/ranlib libfreq_count.a
