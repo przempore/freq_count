@@ -18,7 +18,17 @@ const Word_count_col Text_manipulator::count_words(const std::vector<std::string
 
 const Letters_count_col Text_manipulator::count_letters(const std::vector<std::string> &text)
 {
-    return Letters_count_col{};
+    Letters_count_col letters_count;
+
+    for (auto&& word : text)
+    {
+        for (auto&& letter : word)
+        {
+            letters_count[letter]++;
+        }
+    }
+
+    return letters_count;
 }
 
 
