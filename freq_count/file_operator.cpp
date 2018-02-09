@@ -4,7 +4,7 @@
 
 namespace
 {
-constexpr unsigned int FILE_CONTENT_VEC_START_SIZE = 200;
+constexpr size_t FILE_CONTENT_VEC_START_SIZE = 200;
 }
 
 namespace freq_analizer

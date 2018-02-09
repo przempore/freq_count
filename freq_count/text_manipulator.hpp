@@ -18,9 +18,9 @@ class IText_manipulator
 public:
     ~IText_manipulator() = default;
 
-    virtual const word_count_col count_words(words const& text) = 0;
-    virtual const letters_count_col count_letters(words const& text) = 0;
-    virtual const word_count_col count_N_grams(words const& text) = 0;
+    virtual const word_count_col count_words(words const& text) const = 0;
+    virtual const letters_count_col count_letters(words const& text) const = 0;
+    virtual const word_count_col count_N_grams(words const& text, int const n) const = 0;
 };
 
 class Text_manipulator : public IText_manipulator
@@ -29,8 +29,9 @@ public:
     Text_manipulator()
     {}
 
-    const word_count_col count_words(words const& text) override;
-    const letters_count_col count_letters(words const& text) override;
+    const word_count_col count_words(words const& text) const override;
+    const letters_count_col count_letters(words const& text) const override;
+    const word_count_col count_N_grams(words const& text, int const n) const override;
 };
 
 }

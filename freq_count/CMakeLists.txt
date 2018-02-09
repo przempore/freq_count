@@ -9,6 +9,7 @@ set(freq_count_src
     file_operator.cpp
     text_manipulator.hpp
     text_manipulator.cpp
+    additional_functions.hpp
     )
 
 
