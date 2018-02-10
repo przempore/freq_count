@@ -24,19 +24,19 @@ namespace functions
 
 TEST(additional_function_test, should_sort_map)
 {
-    auto&& sorted_map = sort_map(unsorted_map);
+    const auto&& sorted_map = sort_map(unsorted_map);
 
-//    EXPECT_EQ(unsorted_map.size(), sorted_map.size());
+    EXPECT_EQ(unsorted_map.size(), sorted_map.size());
 
-//    std::map<size_t, std::vector<std::string>> expected_map
-//    {
-//        { 1, {"two"} },
-//        { 2, {"four"} },
-//        { 3, {"one"} },
-//        { 5, {"three"} }
-//    };
+    const std::map<size_t, std::vector<std::string>, std::greater<size_t>> expected_map
+    {
+        { 1, {"two"} },
+        { 2, {"four"} },
+        { 3, {"one"} },
+        { 5, {"three"} }
+    };
 
-//    EXPECT_EQ(sorted_map, expected_map);
+    EXPECT_EQ(sorted_map, expected_map);
 }
 
 }
