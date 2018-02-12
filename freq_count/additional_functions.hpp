@@ -33,8 +33,35 @@ std::ostream& operator<< (std::ostream& out, std::vector<T> const& v)
         return out;
     }
 
-//    out << " [";
+    out << '[';
     std::copy(std::begin(v), std::end(v), std::ostream_iterator<T>(out, ", "));
+    out << "\b\b]";
+
+    return out;
+}
+
+template <typename T, typename U>
+std::ostream& operator<< (std::ostream& out, std::pair<T, U> const& p)
+{
+    out << '<' << p.first << ", " << p.second << ">";
+    return out;
+}
+
+
+template <typename T, typename U>
+std::ostream& operator<< (std::ostream& out, std::map<T, U> const& map_to_print)
+{
+    if (map_to_print.empty())
+    {
+        return out;
+    }
+
+    out << '[';
+    for (auto&& m : map_to_print)
+    {
+        out << m << "\n";
+    }
+
     out << "\b\b]";
 
     return out;

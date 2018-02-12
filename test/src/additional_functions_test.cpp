@@ -4,6 +4,8 @@
 #include <vector>
 #include "additional_functions.hpp"
 
+using namespace testing;
+
 namespace
 {
 
@@ -13,6 +15,14 @@ std::map<std::string, size_t> unsorted_map
     { "two", 1 },
     { "three", 5 },
     { "four", 2 }
+};
+
+std::vector<std::string> vector_of_strings
+{
+    "one",
+    "two",
+    "three",
+    "four"
 };
 
 }
@@ -37,6 +47,41 @@ TEST(additional_function_test, should_sort_map)
     };
 
     EXPECT_EQ(sorted_map, expected_map);
+}
+
+TEST(additional_function_test, should_print_what_vector_contains)
+{
+
+    internal::CaptureStdout();
+    std::cout << vector_of_strings << std::endl;
+    std::string output = internal::GetCapturedStdout();
+
+    EXPECT_EQ(output, "[one, two, three, four, \b\b]\n");
+}
+
+TEST(additional_function_test, should_print_what_pair_contains)
+{
+    std::pair<int, std::string> pair_to_check{1, "one"};
+    testing::internal::CaptureStdout();
+    std::cout << pair_to_check << std::endl;
+    std::string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(output, "<1, one>\n");
+}
+
+TEST(additional_function_test, should_print_what_map_contains)
+{
+    std::cout << unsorted_map << std::endl;
+
+    testing::internal::CaptureStdout();
+    std::cout << unsorted_map << std::endl;
+    std::string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(output, "[<four, 2>\n"
+                      "<one, 3>\n"
+                      "<three, 5>\n"
+                      "<two, 1>\n"
+                      "\b\b]\n");
 }
 
 }
