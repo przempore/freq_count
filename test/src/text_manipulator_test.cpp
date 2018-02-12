@@ -8,7 +8,7 @@ using namespace ::testing;
 namespace
 {
 
-freq_analizer::text_operation::words text
+freq_analizer::text_operation::words_t text
 {
     "first", "first", "first", "first",
     "second", "second", "second",

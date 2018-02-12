@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
-#include "file_operator.hpp"
 #include "consts.hpp"
+#include "file_operator.hpp"
+#include "text_manipulator.hpp"
 
 namespace freq_analizer
 {
@@ -29,35 +30,35 @@ auto create_file_readers_with_files(int argc, char* argv[])
     return std::move(files_readers);
 }
 
-
-
 error_causes calculate_freq(int argc, char* argv[])
 {
     using namespace file_operation;
+    using namespace text_operation;
 
     auto file_readers = create_file_readers_with_files(argc, argv);
 
+    Text_manipulator text_manipulator;
     for (auto&& fr : file_readers)
     {
-
+        text_manipulator.count_letters(fr.get_file_content());
     }
 
     return error_causes::success;
 }
-
 }
 
 
 int main(int argc, char* argv[])
 {
+    using namespace freq_analizer;
     if (argc < 2)
     {
-        freq_analizer::print_help(argv[0]);
+        print_help(argv[0]);
 
         return 1;
     }
 
-    if (freq_analizer::calculate_freq(argc, argv) != freq_analizer::consts::error_causes::success)
+    if (calculate_freq(argc, argv) != consts::error_causes::success)
     {
         return 2;
     }
