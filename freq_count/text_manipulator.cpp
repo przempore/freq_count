@@ -1,4 +1,5 @@
-#include <text_manipulator.hpp>
+#include "text_manipulator.hpp"
+#include "additional_functions.hpp"
 #include <numeric>
 #include <iostream>
 
@@ -7,7 +8,7 @@ namespace freq_analizer
 namespace text_operation
 {
 
-const word_count_col Text_manipulator::count_words(words const& text) const
+const word_count_col Text_manipulator::count_words(words_t const& text) const
 {
     word_count_col word_count;
     for (auto&& t : text)
@@ -18,7 +19,7 @@ const word_count_col Text_manipulator::count_words(words const& text) const
     return std::move(word_count);
 }
 
-const letters_count_col Text_manipulator::count_letters(words const& text) const
+const letters_count_col Text_manipulator::count_letters(words_t const& text) const
 {
     letters_count_col letters_count;
 
@@ -33,7 +34,7 @@ const letters_count_col Text_manipulator::count_letters(words const& text) const
     return std::move(letters_count);
 }
 
-const word_count_col Text_manipulator::count_N_grams(words const& text, const int n) const
+const word_count_col Text_manipulator::count_N_grams(words_t const& text, const int n) const
 {
     word_count_col n_grams_count{};
 

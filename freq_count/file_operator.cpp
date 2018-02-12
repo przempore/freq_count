@@ -16,7 +16,7 @@ File_reader::File_reader(std::string const& path) : file_path_(path),
                                                     content_{}
 {}
 
-file_content File_reader::get_file_content()
+file_content const& File_reader::get_file_content()
 {
     if (content_.size() == 0)
     {

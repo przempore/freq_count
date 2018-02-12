@@ -3,6 +3,8 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <iostream>
+#include <iterator>
 
 
 namespace freq_analizer
@@ -21,6 +23,21 @@ const auto sort_map(std::map<T, size_t> const& unsorted_map)
     }
 
     return sorted_map;
+}
+
+template <typename T>
+std::ostream& operator<< (std::ostream& out, const std::vector<T>& v)
+{
+    if (v.empty())
+    {
+        return out;
+    }
+
+//    out << " [";
+    std::copy(std::begin(v), std::end(v), std::ostream_iterator<T>(out, ", "));
+    out << "\b\b]";
+
+    return out;
 }
 
 }
