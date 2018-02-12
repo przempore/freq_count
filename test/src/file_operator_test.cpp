@@ -22,7 +22,7 @@ struct file_operator_test : Test
 TEST_F(file_operator_test, should_read_file)
 {
     file_content content;
-    content = sut->read_from_file();
+    content = sut->get_file_content();
 
     ASSERT_TRUE(content.size() != 0);
 }

@@ -2,6 +2,12 @@
 
 #include <vector>
 
+
+namespace freq_analizer
+{
+namespace consts
+{
+
 const std::vector<std::pair<char, float>> english_freq
                                         { {'a', 8.167f},
                                           {'b', 1.492f},
@@ -29,3 +35,13 @@ const std::vector<std::pair<char, float>> english_freq
                                           {'x', 0.150f},
                                           {'y', 1.974f},
                                           {'z', 0.074f} };
+
+enum class error_causes
+{
+    success,
+    too_few_arguments,
+    calcuation_went_wrong
+};
+
+}
+}
