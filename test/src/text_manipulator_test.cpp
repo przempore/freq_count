@@ -59,21 +59,5 @@ TEST_F(Text_manipulator_test, should_count_letters)
     sut.count_N_grams(text, 4);
 }
 
-//TEST_F(Text_manipulator_test, should_sort_map)
-//{
-//    word_count_col words
-//    {
-//        { "first", 4 }, { "second", 3 },
-//        { "third", 1 }, { "fourth", 5 },
-//        { "fifth", 2 }, { "sixth", 5 }, { "ssssss", 1 }
-//    };
-
-//    auto&& unsorted_map = sut.count_words(text);
-//    auto&& sorted_map = sut.sort_map(unsorted_map);
-
-//    EXPECT_EQ(sorted_map.size(), unsorted_map.size());
-
-//}
-
 }
 }
