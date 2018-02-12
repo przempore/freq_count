@@ -4,8 +4,6 @@
 #include <vector>
 #include <string>
 
-#include "consts.hpp"
-
 namespace freq_analizer
 {
 namespace file_operation
@@ -18,7 +16,7 @@ class IFile_reader
 public:
     ~IFile_reader() = default;
 
-    virtual file_content read_from_file() = 0;
+    virtual file_content get_file_content() = 0;
 };
 
 class File_reader : public IFile_reader
@@ -26,7 +24,9 @@ class File_reader : public IFile_reader
 public:
     File_reader(std::string const& path);
 
-    file_content read_from_file() override;
+    file_content get_file_content() override;
+private:
+    void read_from_file();
 
 private:
     std::string const& file_path_;

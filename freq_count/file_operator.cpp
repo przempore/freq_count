@@ -13,10 +13,20 @@ namespace file_operation
 {
 
 File_reader::File_reader(std::string const& path) : file_path_(path),
-    content_{}
+                                                    content_{}
 {}
 
-file_content File_reader::read_from_file()
+file_content File_reader::get_file_content()
+{
+    if (content_.size() == 0)
+    {
+        read_from_file();
+    }
+
+    return content_;
+}
+
+void File_reader::read_from_file()
 {
     content_.reserve(FILE_CONTENT_VEC_START_SIZE);
     std::fstream file(file_path_, std::ios::in);
@@ -29,8 +39,6 @@ file_content File_reader::read_from_file()
             content_.push_back(line);
         }
     }
-
-    return content_;
 }
 
 }
