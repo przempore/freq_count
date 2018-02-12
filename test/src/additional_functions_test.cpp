@@ -71,8 +71,6 @@ TEST(additional_function_test, should_print_what_pair_contains)
 
 TEST(additional_function_test, should_print_what_map_contains)
 {
-    std::cout << unsorted_map << std::endl;
-
     testing::internal::CaptureStdout();
     std::cout << unsorted_map << std::endl;
     std::string output = testing::internal::GetCapturedStdout();
