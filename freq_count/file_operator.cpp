@@ -32,6 +32,11 @@ void File_reader::read_from_file()
     std::fstream file(file_path_, std::ios::in);
     std::string line;
 
+    if (not file)
+    {
+        std::cerr << "Can't open file: " << file_path_ << std::endl;
+    }
+
     if (file.is_open())
     {
         while (file >> line)
