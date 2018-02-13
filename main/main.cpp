@@ -8,6 +8,7 @@ namespace freq_analizer
 {
 
 using namespace consts;
+using file_readers = std::vector<file_operation::File_reader>;
 
 error_causes print_help(char* filename)
 {
@@ -15,11 +16,11 @@ error_causes print_help(char* filename)
     return error_causes::too_few_arguments;
 }
 
-auto create_file_readers_with_files(int argc, char* argv[])
+file_readers create_file_readers_with_files(int argc, char* argv[])
 {
-    using namespace file_operation;
 
-    std::vector<File_reader> files_readers {};
+    using namespace file_operation;
+    file_readers files_readers {};
 
     for (size_t file_idx = 1; file_idx < argc; file_idx++)
     {
@@ -30,22 +31,28 @@ auto create_file_readers_with_files(int argc, char* argv[])
     return std::move(files_readers);
 }
 
+void count_letters_in_files(file_readers f_readers)
+{
+    using namespace text_operation;
+    text_operation::Text_manipulator text_manipulator;
+    for (auto&& fr : f_readers)
+    {
+        auto out = text_manipulator.count_letters(fr.get_file_content());
+    }
+}
+
 error_causes calculate_freq(int argc, char* argv[])
 {
     using namespace file_operation;
-    using namespace text_operation;
 
-    auto file_readers = create_file_readers_with_files(argc, argv);
+    auto f_readers = create_file_readers_with_files(argc, argv);
 
-    Text_manipulator text_manipulator;
-    for (auto&& fr : file_readers)
-    {
-        text_manipulator.count_letters(fr.get_file_content());
-    }
+    count_letters_in_files(f_readers);
 
     return error_causes::success;
 }
-}
+
+} // namespace freq_analizer
 
 
 int main(int argc, char* argv[])
