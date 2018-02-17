@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <iterator>
+#include <sstream>
 
 
 namespace freq_analizer
@@ -66,6 +67,20 @@ std::ostream& operator<< (std::ostream& out, std::map<T, U> const& map_to_print)
 
     return out;
 }
+
+// std::vector<std::string> cut_string(std::string const& input)
+// {
+//     std::stringstream text(input);
+//     std::string segment;
+//     std::vector<std::string> seglist;
+
+//     while (std::getline(text, segment, '/'))
+//     {
+//         seglist.push_back(segment);
+//     }
+
+//     return seglist;
+// }
 
 }
 }

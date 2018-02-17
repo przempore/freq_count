@@ -3,6 +3,7 @@
 #include "consts.hpp"
 #include "file_operator.hpp"
 #include "text_manipulator.hpp"
+#include "result_printer.hpp"
 
 namespace freq_analizer
 {
@@ -12,13 +13,12 @@ using file_readers = std::vector<file_operation::File_reader>;
 
 error_causes print_help(char* filename)
 {
-    std::cout << "Usage: " << filename << " <file_n>" << std::endl;
+    std::cout << "Usage: " << filename << " <file_name>" << std::endl;
     return error_causes::too_few_arguments;
 }
 
 file_readers create_file_readers_with_files(int argc, char* argv[])
 {
-
     using namespace file_operation;
     file_readers files_readers {};
 
@@ -33,12 +33,18 @@ file_readers create_file_readers_with_files(int argc, char* argv[])
 
 void count_letters_in_files(file_readers f_readers)
 {
+    result_printer::Result_printer res_print;
     using namespace text_operation;
     text_operation::Text_manipulator text_manipulator;
+    std::vector<letters_count_col> letters_col;
+    std::vector<word_count_col> words_col;
     for (auto&& fr : f_readers)
     {
-        auto out = text_manipulator.count_letters(fr.get_file_content());
+        letters_col.push_back(text_manipulator.count_letters(fr.get_file_content()));
+        words_col.push_back(text_manipulator.count_words(fr.get_file_content()));
     }
+    res_print.print_letters(letters_col[0]);
+    res_print.print_words(words_col[0]);
 }
 
 error_causes calculate_freq(int argc, char* argv[])

@@ -19,6 +19,13 @@ freq_analizer::text_operation::words_t text
     "ssssss"
 };
 
+freq_analizer::text_operation::words_t text_with_multiple_words_separated_with_slashes
+{
+    "main/CMakeFiles/freq_analizer_app.dir/build",
+    "main/CMakeFiles/freq_analizer_app.dir/main.cpp.i",
+    "main/CMakeFiles/freq_analizer_app.dir/rule"
+};
+
 }
 
 namespace freq_analizer
@@ -56,7 +63,20 @@ TEST_F(Text_manipulator_test, should_count_letters)
     };
 
     EXPECT_EQ(sut.count_letters(text), letters_count);
-    sut.count_N_grams(text, 4);
+}
+
+TEST_F(Text_manipulator_test, should_count_words_without_slashe)
+{
+    word_count_col expected_words
+    {
+        { "main", 4 }, { "CMakeFiles", 3 },
+        { "freq_analizer_app", 3 }, { "dir", 3 },
+        { "build", 1 }, { "main", 1 }, { "cpp", 1 },
+        { "rule", 1 }
+    };
+
+
+    EXPECT_EQ(sut.count_words(text_with_multiple_words_separated_with_slashes), expected_words);
 }
 
 }

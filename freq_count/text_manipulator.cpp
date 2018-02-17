@@ -3,6 +3,8 @@
 #include <numeric>
 #include <iostream>
 
+#include "result_printer.hpp"
+
 namespace freq_analizer
 {
 namespace text_operation
@@ -10,6 +12,9 @@ namespace text_operation
 
 const word_count_col Text_manipulator::count_words(words_t const& text) const
 {
+    // auto a = functions::cut_string(text[0]);
+    // result_printer::Result_printer r_printer;
+    // r_printer.print_words_t(a);
     word_count_col word_count;
     for (auto&& t : text)
     {
