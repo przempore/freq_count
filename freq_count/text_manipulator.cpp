@@ -5,30 +5,40 @@
 
 #include "result_printer.hpp"
 
+namespace
+{
+std::string const DELIMITER {"/.-$()@:=#&\"\\!"};
+}
+
 namespace freq_analizer
 {
 namespace text_operation
 {
 
-const word_count_col Text_manipulator::count_words(words_t const& text) const
+const word_count_col Text_manipulator::count_words(words_t const& text)
 {
-    // auto a = functions::cut_string(text[0]);
-    // result_printer::Result_printer r_printer;
-    // r_printer.print_words_t(a);
+    auto words = strip_unicode_in_vector(text);
     word_count_col word_count;
-    for (auto&& t : text)
+    for (auto&& w : words)
     {
-        word_count[t]++;
+        if (auto out = cut_string_if_needed(w, DELIMITER); not out.empty())
+        {
+            fill_word_count_col(out, word_count);
+            continue;
+        }
+        word_count[w]++;
     }
 
     return std::move(word_count);
 }
 
-const letters_count_col Text_manipulator::count_letters(words_t const& text) const
+const letters_count_col Text_manipulator::count_letters(words_t const& text)
 {
+    auto words = strip_unicode_in_vector(text);
+
     letters_count_col letters_count;
 
-    for (auto&& word : text)
+    for (auto&& word : words)
     {
         for (auto&& letter : word)
         {
@@ -39,12 +49,14 @@ const letters_count_col Text_manipulator::count_letters(words_t const& text) con
     return std::move(letters_count);
 }
 
-const word_count_col Text_manipulator::count_N_grams(words_t const& text, const int n) const
+const word_count_col Text_manipulator::count_N_grams(words_t const& text, const int n)
 {
+    auto words = strip_unicode_in_vector(text);
+
     word_count_col n_grams_count{};
 
     std::string s;
-    s = std::accumulate(std::begin(text), std::end(text), s);
+    s = std::accumulate(std::begin(words), std::end(words), s);
 
     for (size_t idx = 0; idx < s.size(); idx++)
     {
@@ -52,6 +64,51 @@ const word_count_col Text_manipulator::count_N_grams(words_t const& text, const 
     }
 
     return std::move(n_grams_count);
+}
+
+bool Text_manipulator::should_cut_string(std::string const& s_to_cut, std::string const& s_to_find) const
+{
+    return std::string::npos != s_to_cut.find_first_of(s_to_find);
+}
+
+words_t Text_manipulator::cut_string_if_needed(std::string const& s_to_cut, const std::string &delimeter)
+{
+    if (not should_cut_string(s_to_cut, delimeter))
+    {
+        return words_t{};
+    }
+
+    auto cutted_string = functions::cut_string(s_to_cut, delimeter);
+    return cutted_string;
+}
+
+void Text_manipulator::fill_word_count_col(words_t const& text, word_count_col& word_count)
+{
+    for (auto&& t : text)
+    {
+        word_count[t]++;
+    }
+}
+
+bool invalid_char(char c)
+{
+    return not(c >= 0 and c < 128);
+}
+
+void Text_manipulator::strip_unicode(std::string& str)
+{
+    str.erase(std::remove_if(std::begin(str), std::end(str), invalid_char), std::end(str));
+}
+
+words_t Text_manipulator::strip_unicode_in_vector(words_t const& words)
+{
+    auto text = words;
+    for (auto&& word : text)
+    {
+        strip_unicode(word);
+    }
+
+    return text;
 }
 
 }

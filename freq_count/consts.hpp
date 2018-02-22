@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 
 namespace freq_analizer
@@ -35,6 +36,8 @@ const std::vector<std::pair<char, float>> english_freq
                                           {'x', 0.150f},
                                           {'y', 1.974f},
                                           {'z', 0.074f} };
+
+const std::string alphabet {"abcdefghijklmnopqrstuwxyz"};
 
 enum class error_causes
 {

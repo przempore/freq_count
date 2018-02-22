@@ -75,10 +75,10 @@ TEST(additional_function_test, should_print_what_map_contains)
     std::cout << unsorted_map << std::endl;
     std::string output = testing::internal::GetCapturedStdout();
 
-    EXPECT_EQ(output, "[<four, 2>\n"
-                      "<one, 3>\n"
-                      "<three, 5>\n"
-                      "<two, 1>\n"
+    EXPECT_EQ(output, "[<four, 2> "
+                      "<one, 3> "
+                      "<three, 5> "
+                      "<two, 1> "
                       "\b\b]\n");
 }
 
