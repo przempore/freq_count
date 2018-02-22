@@ -93,14 +93,9 @@ void Text_manipulator::fill_word_count_col(words_t const& text, word_count_col& 
     }
 }
 
-bool invalid_char(char c)
-{
-    return not(c >= 0 and c < 128);
-}
-
 void Text_manipulator::strip_unicode(std::string& str)
 {
-    str.erase(std::remove_if(std::begin(str), std::end(str), invalid_char), std::end(str));
+    str.erase(std::remove_if(std::begin(str), std::end(str), [](auto&& c) { return not(c >= 0 and c < 128); }), std::end(str));
 }
 
 words_t Text_manipulator::strip_unicode_in_vector(words_t const& words)
