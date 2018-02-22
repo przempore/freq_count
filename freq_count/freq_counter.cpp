@@ -18,14 +18,14 @@ letter_freq Analizer::analize_letter_freq(letters_count_col const& letters)
     }
 
     letter_freq l_freq;
-    for (auto&& a : consts::alphabet)
+    for (auto&& letter : consts::alphabet)
     {
-        if (auto aa = letters.find(a); aa != std::end(letters))
+        if (auto found_letter = letters.find(letter); found_letter != std::end(letters))
         {
-            l_freq[aa->first] = static_cast<float>(aa->second)/letter_count;
+            l_freq[found_letter->first] = found_letter->second/letter_count;
             continue;
         }
-        l_freq[a] = 0;
+        l_freq[letter] = 0.f;
     }
 
     return l_freq;

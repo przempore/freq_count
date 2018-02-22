@@ -37,7 +37,7 @@ const std::vector<std::pair<char, float>> english_freq
                                           {'y', 1.974f},
                                           {'z', 0.074f} };
 
-const std::string alphabet {"abcdefghijklmnopqrstuwxyz"};
+const std::string alphabet {"abcdefghijklmnopqrstuvwxyz"};
 
 enum class error_causes
 {

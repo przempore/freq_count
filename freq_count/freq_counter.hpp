@@ -8,7 +8,7 @@ namespace freq_analizer
 namespace analizer
 {
 
-using letters_count_col = std::map<char, unsigned int>;
+using letters_count_col = std::map<char, float>;
 using letter_freq = std::map<char, float>;
 
 class IAnalizer
