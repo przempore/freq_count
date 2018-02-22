@@ -9,7 +9,7 @@ namespace freq_analizer
 namespace analizer
 {
 
-letter_freq Analizer::analize_letter_freq(letters_count_col const& letters)
+letter_freq Analizer::get_letter_freq(letters_count_col const& letters)
 {
     int letter_count = 0;
     for (auto&& [letter, count] : letters)
@@ -25,10 +25,14 @@ letter_freq Analizer::analize_letter_freq(letters_count_col const& letters)
             l_freq[found_letter->first] = found_letter->second/letter_count;
             continue;
         }
-        l_freq[letter] = 0.f;
     }
 
     return l_freq;
+}
+
+n_gram_freq Analizer::get_n_gram_freq(n_gram_col const& n_gram)
+{
+    return n_gram_freq{};
 }
 
 }

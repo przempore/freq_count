@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <map>
+#include <string>
 
 #include "freq_counter.hpp"
 #include "text_manipulator.hpp"
@@ -22,6 +23,11 @@ letters_count_col letters_count
     {'f', f_occurance}, {'t', t_occurance}
 };
 
+n_gram_col n2gram_col
+{
+    {"th", 4}, {"aa", 7}
+};
+
 }
 
 struct Analizer_test : Test
@@ -36,16 +42,17 @@ TEST_F(Analizer_test, should_analize_letter_freq)
 
     letter_freq expected_freq
     {
-        {'a', 0}, {'b', 0}, {'c', 0}, {'d', 0}, {'e', 0}, {'f', expected_f_ratio}, {'g', 0}, {'h', 0},
-        {'i', 0}, {'j', 0}, {'k', 0}, {'l', 0}, {'m', 0}, {'n', 0}, {'o', 0}, {'p', 0},
-        {'q', 0}, {'r', 0}, {'s', 0}, {'t', expected_t_ratio}, {'u', 0}, {'v', 0}, {'w', 0},
-        {'x', 0}, {'y', 0}, {'z', 0}
+        {'f', expected_f_ratio}, {'t', expected_t_ratio}
     };
 
+    EXPECT_EQ(expected_freq, object_under_test.get_letter_freq(letters_count));
+}
 
+TEST_F(Analizer_test, should_analize_2gram_freq)
+{
+    n_gram_freq n_gram;
 
-
-    EXPECT_EQ(expected_freq, object_under_test.analize_letter_freq(letters_count));
+    EXPECT_EQ(n_gram, object_under_test.get_n_gram_freq(n2gram_col));
 }
 
 }

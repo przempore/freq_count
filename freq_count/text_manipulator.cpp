@@ -52,7 +52,7 @@ const letters_count_col Text_manipulator::count_letters(words_t const& text)
     return std::move(letters_count);
 }
 
-const word_count_col Text_manipulator::count_N_grams(words_t const& text, const int n)
+const word_count_col Text_manipulator::count_N_grams(words_t const& text, int n)
 {
     auto words = strip_unicode_in_vector(text);
 
