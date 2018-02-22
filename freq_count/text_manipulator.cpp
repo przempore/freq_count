@@ -5,6 +5,9 @@
 
 #include "result_printer.hpp"
 
+// todo: try to remove copy vector like this -> auto words = strip_unicode_in_vector(text);
+
+
 namespace
 {
 std::string const DELIMITER {"/.-$()@:=#&\"\\!"};
