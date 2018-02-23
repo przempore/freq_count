@@ -4,6 +4,7 @@
 
 #include "freq_counter.hpp"
 #include "text_manipulator.hpp"
+#include "additional_functions.hpp"
 
 
 using namespace testing;
@@ -15,17 +16,26 @@ namespace analizer
 namespace
 {
 
-const float f_occurance = 13.f;
-const float t_occurance = 17.f;
+constexpr float letter1_occurance = 13.f;
+constexpr float letter2_occurance = 17.f;
+constexpr char check_letter1 = 'f';
+constexpr char check_letter2 = 't';
+constexpr int ulp = 5;
+const std::string n2gram_1 { "th" };
+const std::string n2gram_2 { "aa" };
+constexpr float n2gram_1_occurance = 4.f;
+constexpr float n2gram_2_occurance = 7.f;
 
 letters_count_col letters_count
 {
-    {'f', f_occurance}, {'t', t_occurance}
+    {check_letter1, letter1_occurance},
+    {check_letter2, letter2_occurance}
 };
 
 n_gram_col n2gram_col
 {
-    {"th", 4}, {"aa", 7}
+    {n2gram_1, n2gram_1_occurance},
+    {n2gram_2, n2gram_2_occurance}
 };
 
 }
@@ -37,15 +47,18 @@ struct Analizer_test : Test
 
 TEST_F(Analizer_test, should_analize_letter_freq)
 {
-    float expected_f_ratio = f_occurance/(t_occurance + f_occurance);
-    float expected_t_ratio = t_occurance/(t_occurance + f_occurance);
+    float expected_f_ratio = letter1_occurance/(letter2_occurance + letter1_occurance);
+    float expected_t_ratio = letter2_occurance/(letter2_occurance + letter1_occurance);
 
     letter_freq expected_freq
     {
-        {'f', expected_f_ratio}, {'t', expected_t_ratio}
+        {check_letter1, expected_f_ratio}, {check_letter2, expected_t_ratio}
     };
 
-    EXPECT_EQ(expected_freq, object_under_test.get_letter_freq(letters_count));
+    auto ret = object_under_test.get_letter_freq(letters_count);
+
+    EXPECT_TRUE(functions::almost_equal(expected_freq[check_letter1], ret[check_letter1], ulp));
+    EXPECT_TRUE(functions::almost_equal(expected_freq[check_letter2], ret[check_letter2], ulp));
 }
 
 TEST_F(Analizer_test, should_analize_2gram_freq)

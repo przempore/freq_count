@@ -10,7 +10,7 @@
 
 namespace
 {
-std::string const DELIMITER {"/.-$()@:=#&\"\\!"};
+std::string const delimeter {"/.-$()@:=#&\"\\!"};
 }
 
 namespace freq_analizer
@@ -24,7 +24,7 @@ const word_count_col Text_manipulator::count_words(words_t const& text)
     word_count_col word_count;
     for (auto&& w : words)
     {
-        if (auto out = cut_string_if_needed(w, DELIMITER); not out.empty())
+        if (auto out = cut_string_if_needed(w, delimeter); not out.empty())
         {
             fill_word_count_col(out, word_count);
             continue;
