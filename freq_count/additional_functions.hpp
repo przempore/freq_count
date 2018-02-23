@@ -5,6 +5,10 @@
 #include <string>
 #include <iostream>
 #include <iterator>
+#include <sstream>
+#include <boost/algorithm/string.hpp>
+#include <type_traits>
+#include <limits>
 
 
 namespace freq_analizer
@@ -22,7 +26,7 @@ auto sort_map(std::map<T, size_t> const& unsorted_map)
         sorted_map[frq].emplace_back(str);
     }
 
-    return std::move(sorted_map);
+    return sorted_map;
 }
 
 template <typename T>
@@ -59,12 +63,23 @@ std::ostream& operator<< (std::ostream& out, std::map<T, U> const& map_to_print)
     out << '[';
     for (auto&& m : map_to_print)
     {
-        out << m << "\n";
+        out << m << " ";
     }
 
     out << "\b\b]";
 
     return out;
+}
+
+std::vector<std::string> cut_string(std::string const& input, std::string const& delim);
+
+
+template<class T>
+typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type
+    almost_equal(T x, T y, int ulp)
+{
+    return std::abs(x - y) <= std::numeric_limits<T>::epsilon() * std::abs(x + y) * ulp
+           || std::abs(x - y) < std::numeric_limits<T>::min();
 }
 
 }

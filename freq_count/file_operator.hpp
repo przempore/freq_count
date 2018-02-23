@@ -29,7 +29,7 @@ private:
     void read_from_file();
 
 private:
-    std::string const& file_path_;
+    std::string const file_path_;
     file_content content_;
 };
 

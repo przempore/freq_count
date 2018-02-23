@@ -3,23 +3,24 @@
 #include "consts.hpp"
 #include "file_operator.hpp"
 #include "text_manipulator.hpp"
+#include "result_printer.hpp"
 
 namespace freq_analizer
 {
 
 using namespace consts;
+using file_readers = std::vector<file_operation::File_reader>;
 
 error_causes print_help(char* filename)
 {
-    std::cout << "Usage: " << filename << " <file_n>" << std::endl;
+    std::cout << "Usage: " << filename << " <file_name>" << std::endl;
     return error_causes::too_few_arguments;
 }
 
-auto create_file_readers_with_files(int argc, char* argv[])
+file_readers create_file_readers_with_files(int argc, char* argv[])
 {
     using namespace file_operation;
-
-    std::vector<File_reader> files_readers {};
+    file_readers files_readers {};
 
     for (size_t file_idx = 1; file_idx < argc; file_idx++)
     {
@@ -27,25 +28,37 @@ auto create_file_readers_with_files(int argc, char* argv[])
         files_readers.push_back(file_operation);
     }
 
-    return std::move(files_readers);
+    return files_readers;
+}
+
+void count_letters_in_files(file_readers f_readers)
+{
+    result_printer::Result_printer res_print;
+    using namespace text_operation;
+    text_operation::Text_manipulator text_manipulator;
+    std::vector<letters_count_col> letters_col;
+    std::vector<word_count_col> words_col;
+    for (auto&& fr : f_readers)
+    {
+        letters_col.push_back(text_manipulator.count_letters(fr.get_file_content()));
+        words_col.push_back(text_manipulator.count_words(fr.get_file_content()));
+    }
+    res_print.print_letters(letters_col[0]);
+    res_print.print_words(words_col[0]);
 }
 
 error_causes calculate_freq(int argc, char* argv[])
 {
     using namespace file_operation;
-    using namespace text_operation;
 
-    auto file_readers = create_file_readers_with_files(argc, argv);
+    auto f_readers = create_file_readers_with_files(argc, argv);
 
-    Text_manipulator text_manipulator;
-    for (auto&& fr : file_readers)
-    {
-        text_manipulator.count_letters(fr.get_file_content());
-    }
+    count_letters_in_files(f_readers);
 
     return error_causes::success;
 }
-}
+
+} // namespace freq_analizer
 
 
 int main(int argc, char* argv[])
