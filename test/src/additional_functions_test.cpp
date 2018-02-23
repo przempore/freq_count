@@ -9,20 +9,29 @@ using namespace testing;
 namespace
 {
 
-std::map<std::string, size_t> unsorted_map
+const std::string one {"one"};
+const std::string two {"two"};
+const std::string three {"three"};
+const std::string four {"four"};
+
+constexpr size_t one_occurance = 3;
+constexpr size_t two_occurance = 1;
+constexpr size_t three_occurance = 5;
+constexpr size_t four_occurance = 2;
+
+
+const std::map<std::string, size_t> unsorted_map
 {
-    { "one", 3 },
-    { "two", 1 },
-    { "three", 5 },
-    { "four", 2 }
+    { one, one_occurance },
+    { two, two_occurance },
+    { three, three_occurance },
+    { four, four_occurance }
 };
 
-std::vector<std::string> vector_of_strings
+const std::vector<std::string> vector_of_strings
 {
-    "one",
-    "two",
-    "three",
-    "four"
+    one, two,
+    three, four
 };
 
 }
@@ -40,10 +49,10 @@ TEST(additional_function_test, should_sort_map)
 
     const std::map<size_t, std::vector<std::string>, std::greater<size_t>> expected_map
     {
-        { 1, {"two"} },
-        { 2, {"four"} },
-        { 3, {"one"} },
-        { 5, {"three"} }
+        { two_occurance, {two} },
+        { four_occurance, {four} },
+        { one_occurance, {one} },
+        { three_occurance, {three} }
     };
 
     EXPECT_EQ(sorted_map, expected_map);
@@ -55,18 +64,20 @@ TEST(additional_function_test, should_print_what_vector_contains)
     internal::CaptureStdout();
     std::cout << vector_of_strings << std::endl;
     std::string output = internal::GetCapturedStdout();
+    std::string expected {"[" + one + ", " + two + ", " + three + ", " + four + ", \b\b]\n"};
 
-    EXPECT_EQ(output, "[one, two, three, four, \b\b]\n");
+    EXPECT_EQ(output, expected);
 }
 
 TEST(additional_function_test, should_print_what_pair_contains)
 {
-    std::pair<int, std::string> pair_to_check{1, "one"};
+    std::pair<int, std::string> pair_to_check{1, one};
     testing::internal::CaptureStdout();
     std::cout << pair_to_check << std::endl;
     std::string output = testing::internal::GetCapturedStdout();
 
-    EXPECT_EQ(output, "<1, one>\n");
+    std::string expected { "<1, " + one  + ">\n" };
+    EXPECT_EQ(output, expected);
 }
 
 TEST(additional_function_test, should_print_what_map_contains)
@@ -75,11 +86,12 @@ TEST(additional_function_test, should_print_what_map_contains)
     std::cout << unsorted_map << std::endl;
     std::string output = testing::internal::GetCapturedStdout();
 
-    EXPECT_EQ(output, "[<four, 2>\n"
-                      "<one, 3>\n"
-                      "<three, 5>\n"
-                      "<two, 1>\n"
-                      "\b\b]\n");
+    std::string expected { "[<" + four + ", " + std::to_string(four_occurance) + "> <"
+                            + one + ", " + std::to_string(one_occurance) + "> <"
+                            + three + ", " + std::to_string(three_occurance) + "> <"
+                            + two + ", " + std::to_string(two_occurance) + "> \b\b]\n" };
+
+    EXPECT_EQ(output, expected);
 }
 
 }
