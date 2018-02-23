@@ -24,7 +24,7 @@ auto sort_map(std::map<T, size_t> const& unsorted_map)
         sorted_map[frq].emplace_back(str);
     }
 
-    return std::move(sorted_map);
+    return sorted_map;
 }
 
 template <typename T>

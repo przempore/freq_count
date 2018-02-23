@@ -32,7 +32,7 @@ const word_count_col Text_manipulator::count_words(words_t const& text)
         word_count[w]++;
     }
 
-    return std::move(word_count);
+    return word_count;
 }
 
 const letters_count_col Text_manipulator::count_letters(words_t const& text)
@@ -49,7 +49,7 @@ const letters_count_col Text_manipulator::count_letters(words_t const& text)
         }
     }
 
-    return std::move(letters_count);
+    return letters_count;
 }
 
 const word_count_col Text_manipulator::count_N_grams(words_t const& text, int n)
@@ -66,7 +66,7 @@ const word_count_col Text_manipulator::count_N_grams(words_t const& text, int n)
         n_grams_count[s.substr(idx, n)]++;
     }
 
-    return std::move(n_grams_count);
+    return n_grams_count;
 }
 
 bool Text_manipulator::should_cut_string(std::string const& s_to_cut, std::string const& s_to_find) const

@@ -37,7 +37,6 @@ private:
     bool should_cut_string(std::string const& s_to_cut, std::string const& s_to_find) const;
     words_t cut_string_if_needed(std::string const& s_to_cut, std::string const& delimeter);
     void fill_word_count_col(const words_t &text, word_count_col& word_count);
-//    bool invalid_char(char c);
     void strip_unicode(std::string& str);
     words_t strip_unicode_in_vector(words_t const& words);
 };

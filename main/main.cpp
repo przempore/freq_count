@@ -28,7 +28,7 @@ file_readers create_file_readers_with_files(int argc, char* argv[])
         files_readers.push_back(file_operation);
     }
 
-    return std::move(files_readers);
+    return files_readers;
 }
 
 void count_letters_in_files(file_readers f_readers)
