@@ -3,12 +3,14 @@ cmake_minimum_required(VERSION 2.8)
 set(CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic -Wall")
 
-file(GLOB freq_count_src
-	"include/*.hpp",
-	"source/*.cpp")
+file(GLOB freq_count_src *.cpp
+                         *.hpp)
 
-include_directories("include")
+# Declare the library
+add_library(freq_count STATIC
+    ${freq_count_src}
+)
 
-project(freq_count)
-add_library(${PROJECT_NAME}_obj OBJECT ${freq_count_src})
-add_executable(${PROJECT_NAME} $<TARGET_OBJECTS:${PROJECT_NAME}_obj> main.cpp)
+target_include_directories(freq_count PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
